@@ -1,0 +1,3 @@
+[submodule "week01/mission"]
+	path = week01/mission
+	url = https://github.com/eunsxx/UMC6th-server-practice.git
