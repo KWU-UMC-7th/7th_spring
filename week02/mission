@@ -1,0 +1,62 @@
+1.
+SELECT
+mm.status AS mission_status,
+m.reward AS mission_reward,
+s.name AS store_name,
+m.mission_spec AS mission_detail
+FROM
+member_mission mm
+JOIN
+mission m ON mm.mission_id = m.id
+JOIN
+store s ON m.store_id = s.id
+WHERE
+mm.member_id = <특정회원_ID>;
+2.
+SELECT
+r.id AS review_id,
+m.name AS member_name,
+s.name AS store_name,
+r.body AS review_body,
+r.score AS review_score,
+r.created_at AS review_created_at,
+FROM
+review r
+JOIN
+member m ON r.member_id = m.id
+JOIN
+store s ON r.store_id = s.id
+ORDER BY
+r.created
+
+3.
+SELECT
+m.name AS member_name,
+m.point AS member_point,
+COUNT(CASE WHEN mm.status = '성공' THEN 1 END) AS successful_mission_count,
+mi.deadline AS mission_deadline,
+mi.reward AS mission_reward,
+s.name AS store_name,
+mi.mission_spec AS mission_spec
+FROM
+member_mission mm
+JOIN
+mission mi ON mm.mission_id = mi.id
+JOIN
+store s ON mi.store_id = s.id
+JOIN
+member m ON mm.member_id = m.id
+WHERE
+mm.member_id = <회원_ID>
+GROUP BY
+m.name, m.point, mi.deadline, mi.reward, s.name, mi.mission_spec;
+4.
+SELECT
+name AS member_name,
+email AS member_email,
+spec_address AS phone_number,
+point AS member_point
+FROM
+member
+WHERE
+id = <회원_ID>;
